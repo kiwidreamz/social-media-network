@@ -179,7 +179,9 @@ def profile(request, user_id):
     followers_count = Following.objects.filter(following=user).count()
 
     # Check if followed
-    if Following.objects.filter(user = current_user, following = user):
+    if request.user.is_anonymous:
+        followed = False
+    elif Following.objects.filter(user = current_user, following = user):
         followed = True
     else:
         followed = False
