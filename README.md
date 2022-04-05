@@ -5,11 +5,11 @@
 #### Access Link: <https://socialmedianetwork.pythonanywhere.com/>
 
 This is a project I did while taking CS50's Web Programming with Python and Javascript Course at Harvard University.
-As the fourth project in this course, my task was to design and implement a Twitter-like social network website for making posts, liking posts and following users using Python, JavaScript, HTML, and CSS. This app is built on the Django Framework
+As the fourth project in this course, my task was to design and implement a social network using Python, JavaScript, HTML, and CSS. This app is built on the Django Framework
 
 I will here be discussing the distinctiveness and complexity of my project, what each file contains, how to run this application and any other additional information needed.
 
-## Specifications of this web app
+## Specifications
 
 #### See All Posts
 
@@ -39,7 +39,7 @@ Users can edit their own posts. This is done using Javascript so that it does no
 
 Users can click a button to toggle whether or not the like that post. This is done asynchronously with Javascript so that the server updates the like count is updated without requiring an entire reload of the page.
 
-### Hosting
+## Hosting
 
 Since this is the best project I made so far in my short life as a developer, I wanted to get hosting and make my web app available online.
 After doing some research online, I found two main options that had a free plan offering, [pythonanywhere](https://www.pythonanywhere.com/) and [Heroku](https://www.heroku.com/).
