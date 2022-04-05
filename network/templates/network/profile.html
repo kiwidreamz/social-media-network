@@ -1,0 +1,121 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+
+
+<div class="card" style="width: 64rem; margin: 20px 0 20px 20px; border-radius: 8px; border-color: gainsboro;">
+  <div class="card-body" style="text-align: center; ">
+
+    <a href="/profile/{{user.id}}" id="usernamelink" style="text-decoration: none; color: black;">
+        <h1 class="card-title" >{{user.username}}</h1>
+      </a>
+
+    <div style="display:inline-block; font-size: larger;"><h6 class="card-text">Followers</h6></div>
+    <div style="display:inline-block; font-size: larger; margin-right: 20px;"><h5 class="card-text">{{followers_count}}</h5></div>
+
+    <div style="display:inline-block; font-size: larger;"><h6 class="card-text">Following</h6></div>
+    <div style="display:inline-block; font-size: larger;"><h5 class="card-text">{{following_count}}</h5></div>
+
+    {% if user.is_authenticated %}
+    {% if user != current_user %}
+    <br><br>
+    {% if followed %}
+    <div style="font-size: x-large;"><a href="/unfollow/{{user.id}}" class="card-link">Unfollow</a></div>
+    {% else %}
+    <div style="font-size: x-large;"><a href="/follow/{{user.id}}" class="card-link">Follow</a></div>
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    
+  </div>
+</div>
+
+
+<br><br>
+
+{% for post in posts %}
+<div class="card" style="width: 64rem; margin: 0 0 20px 20px; border-radius: 8px; border-color: gainsboro;">
+    <div class="card-body">
+      <a href="/profile/{{user.id}}" id="usernamelink" style="text-decoration: none; color: black;">
+        <h5 class="card-title">{{post.user.username}}</h5>
+      </a>
+      
+      <p id="{{post.id}}post_id" class="card-text" style="font-size:large;">{{post.text}}</p>
+
+
+      <div style="display:inline-block;"><a href="#!" onclick="like('{{ post.id }}')" id="like_button" class="card-link" style="font-size:large; color: limegreen;">▲</a></div> 
+      <div style="display:inline-block;"><p id="like_count{{post.id}}" class="card-text" style="font-size: larger;">{{post.likes}}</p></div>
+      <div style="display:inline-block;"><a href="#!" onclick="unlike('{{ post.id }}')" id="dislike_button" class="card-link" style="font-size:large; color: red;">▼</a></div>
+
+      <div style="display:inline-block; margin-left:44rem;"><h6 class="card-subtitle mb-1 text-muted">{{post.dateandtime}}</h6></div>
+
+      {% if can_edit %}
+      
+      <!-- Button trigger modal -->
+      <div style="display:inline-block; margin-left:28rem;">
+        <button type="button" name="edit_button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal{{post.id}}" id="modal_button">Edit Post</button>
+      </div>
+      
+      <!-- Modal -->
+      <div class="modal" id="modal{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="{{post.id}}ModalLabel" aria-hidden="true" data-backdrop="false">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Post</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <form method=post action="edit/{{post.id}}">
+                  {% csrf_token %}
+                  <textarea rows="3" class="form-control textarea-edit" name="textarea" id="textareatocollect">{{post.text}}</textarea>
+                  <br>
+                  <div class="modal-footer">
+                      <button class="btn btn-outline-success save edit-post" data-catid="{{post.id}}" type="submit" value="Save" onclick="editpost('{{ post.id }}')">Save Changes</button>
+                      <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                  </div>
+                  <input type="hidden" name="next" value="{{ request.path }}">
+              </form>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      
+      {% endif %}
+
+    </div>
+  </div>
+{% endfor %}
+
+<br>
+<div style="width: 64rem; margin: 0 0 20px 20px;">
+  <div style="display: flex; justify-content: center;">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+
+        {% if first_page %}
+        <li class="page-item disabled"><a class="page-link" href="/profile/{{user.id}}/page/{{previous_page}}">Previous</a></li>
+        {% else %}
+        <li class="page-item "><a class="page-link" href="/profile/{{user.id}}/page/{{previous_page}}">Previous</a></li>
+        {% endif %}
+
+        {% if last_page %}
+        <li class="page-item disabled"><a class="page-link" href="/profile/{{user.id}}/page/{{next_page}}">Next</a></li>
+        {% else %}
+        <li class="page-item"><a class="page-link" href="/profile/{{user.id}}/page/{{next_page}}">Next</a></li>
+        {% endif %}
+
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<br><br><br>
+
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    
+
+
+{% if message %}
+<div>{{ message }}</div>
+{% endif %}
+
+{% if user.is_authenticated %}
+<form method="post" action="{% url 'submit' %}">
+    {% csrf_token %}
+    <div class="container" id="newpost_container" style="width: 64rem; margin: 20px 20px 20px 20px; border: 1px solid; border-radius: 8px; border-color: gainsboro;">
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1" style="font-weight: bolder; font-size: large; margin-top: 10px;">New Post</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="newpost_text"></textarea>
+            <button type="submit" class="btn btn-outline-primary" style="margin-top: 10px;">Post</button>
+        </div>
+    </div>
+</form>
+{% endif %}
+
+<br><br>
+{% for post in posts %}
+<div class="card" style="width: 64rem; margin: 0 0 20px 20px; border-radius: 8px; border-color: gainsboro;">
+    <div class="card-body">
+      <a href="/profile/{{post.user.id}}" id="usernamelink" style="text-decoration: none; color: black;">
+          <h5 class="card-title">{{post.user.username}}</h5>
+      </a>
+      
+      <p class="card-text" style="font-size:large;">{{post.text}}</p>
+
+      <div style="display:inline-block;"><a href="#!" onclick="like('{{ post.id }}')" id="like_button" class="card-link" style="font-size:large; color: limegreen;">▲</a></div> 
+      <div style="display:inline-block;"><p id="like_count{{post.id}}" class="card-text" style="font-size: larger;">{{post.likes}}</p></div>
+      <div style="display:inline-block;"><a href="#!" onclick="unlike('{{ post.id }}')" id="dislike_button" class="card-link" style="font-size:large; color: red;">▼</a></div>
+
+      <div style="display:inline-block; margin-left:44rem;"><h6 class="card-subtitle mb-1 text-muted">{{post.dateandtime}}</h6></div>
+
+      {% if post.user_id == user.id %}
+      
+      <!-- Button trigger modal -->
+      <div style="display:inline-block; margin-left:28rem;">
+        <button type="button" name="edit_button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal{{post.id}}">Edit Post</button>
+      </div>
+      
+      <!-- Modal -->
+      <div class="modal" id="modal{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="{{post.id}}ModalLabel" aria-hidden="true" data-backdrop="false">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Post</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <form method=post action="edit/{{post.id}}">
+                  {% csrf_token %}
+                  <textarea rows="3" class="form-control textarea-edit" name="textarea">{{post.text}}</textarea>
+                  <br>
+                  <div class="modal-footer">
+                      <button class="btn btn-outline-success save edit-post" data-catid="{{post.id}}" type="submit" value="Save"  onclick="editpost('{{ post.id }}')">Save Changes</button>
+                      <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                  </div>
+                  <input type="hidden" name="next" value="{{ request.path }}">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% endif %}
+      
+    </div>
+  </div>
+{% endfor %}
+
+<br>
+<div style="width: 64rem; margin: 0 0 20px 20px;">
+  <div style="display: flex; justify-content: center;">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+
+        {% if first_page %}
+        <li class="page-item disabled"><a class="page-link" href="/page/{{previous_page}}">Previous</a></li>
+        {% else %}
+        <li class="page-item "><a class="page-link" href="/page/{{previous_page}}">Previous</a></li>
+        {% endif %}
+
+        {% if last_page %}
+        <li class="page-item disabled"><a class="page-link" href="/page/{{next_page}}">Next</a></li>
+        {% else %}
+        <li class="page-item"><a class="page-link" href="/page/{{next_page}}">Next</a></li>
+        {% endif %}
+
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<br><br><br>
+
+{% endblock %}
