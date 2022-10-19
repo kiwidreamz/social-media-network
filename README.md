@@ -41,7 +41,7 @@ Users can click a button to toggle whether or not the like that post. This is do
 
 ## Hosting
 
-Since this is the best project I made so far in my short life as a developer, I wanted to get hosting and make my web app available online.
+Since this is the best project I made so far in my short developer career, I wanted to get hosting and make my web app available online.
 After doing some research online, I found two main options that had a free plan offering, [pythonanywhere](https://www.pythonanywhere.com/) and [Heroku](https://www.heroku.com/).
 
 I decided to go with pythonanywhere, and after a little bit of struggle, I managed to get it to work.
