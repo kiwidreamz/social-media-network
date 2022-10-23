@@ -35,7 +35,7 @@ If signed in, the “Following” link in the navigation bar takes the user to a
 
 Users can edit their own posts. This is done using Javascript so that it does not require a reload of the entire page.
 
-#### Like and Unlike
+#### Like and Unlike a Post
 
 Users can click a button to toggle whether or not the like that post. This is done asynchronously with Javascript so that the server updates the like count is updated without requiring an entire reload of the page.
 
