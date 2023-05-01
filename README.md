@@ -44,5 +44,5 @@ Users can click a button to toggle whether or not the like that post. This is do
 Since this is the best project I made so far in my short developer career, I wanted to get hosting and make my web app available online.
 After doing some research online, I found two main options that had a free plan offering, [pythonanywhere](https://www.pythonanywhere.com/) and [Heroku](https://www.heroku.com/).
 
-I decided to go with pythonanywhere, and after a little bit of struggle, I managed to get it to work.
+I decided to go with pythonanywhere, and after a little bit of struggle with file location and dependencies, I managed to get it to work.
 Here is a [link](https://socialmedianetwork.pythonanywhere.com/) to it.
