@@ -27,7 +27,7 @@ Clicking on a username loads that user’s profile page and :
 -   Displays all of that user's posts in reverse chronological order (that way the user sees the most recent posts first)
 -   If signed in, you can follow or unfollow that user
 
-#### Following Page
+#### Followings Page
 
 If signed in, the “Following” link in the navigation bar takes the user to a page where they see all posts made by users that they follow.
 
