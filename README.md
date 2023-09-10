@@ -2,7 +2,7 @@
 
 #### Video Demo: <https://youtu.be/1WGBDMElxgo>
 
-#### Access Link: <https://socialmedianetwork.pythonanywhere.com/>
+#### Access: <https://socialmedianetwork.pythonanywhere.com/>
 
 This is a project I did while taking CS50's Web Programming with Python and Javascript Course at Harvard University.
 As the fourth project in this course, my task was to design and implement a social network using Python, JavaScript, HTML, and CSS. This app is built on the Django Framework
