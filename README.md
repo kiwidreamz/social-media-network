@@ -23,9 +23,9 @@ Users who are signed in can write a new text-based post by filling in text into 
 
 Clicking on a username loads that user’s profile page and :
 
--   Displays the number of followers the user has and the number of people that the user follows
+-   Displays the number of followers the user has and the number of people that the user follows.
 -   Displays all of that user's posts in reverse chronological order (that way the user sees the most recent posts first)
--   If signed in, you can follow or unfollow that user
+-   If signed in, you can follow or unfollow that user.
 
 #### Followings Page
 
